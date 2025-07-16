@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Site da Nagcoop</title>
+</head>
+<body>
+  <h1>Bem-vindo ao site da Nagcoop!</h1>
+  <p>Esse site está online usando GitHub Pages.</p>
+  <a href="settings/">Ir para configurações</a>
+</body>
+</html>
