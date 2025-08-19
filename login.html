@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NAGCOOP • Portal</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- Firebase (compat) SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+
+    <script defer src="js/firebase-config.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <h1><a href="./">NAGCOOP</a></h1>
+      <nav>
+        <a href="index.html">Início</a>
+        <a href="downloads.html">Downloads</a>
+        <a href="admin.html" id="adminLink">Admin</a>
+        <a href="login.html" id="loginLink">Entrar</a>
+        <button id="logoutBtn" class="linklike" style="display:none;">Sair</button>
+      </nav>
+    </header>
+    <main class="container">
+  <section class="card">
+    <h2>Entrar / Criar conta</h2>
+    <p>Use email e senha para autenticar. (Somente quem estiver logado consegue publicar.)</p>
+    <form id="loginForm">
+      <label>Email
+        <input type="email" id="email" required />
+      </label>
+      <label>Senha
+        <input type="password" id="password" minlength="6" required />
+      </label>
+      <div class="row">
+        <button type="submit" id="loginBtn">Entrar</button>
+        <button type="button" id="signupBtn" class="secondary">Criar conta</button>
+      </div>
+      <p id="msg" class="muted"></p>
+    </form>
+  </section>
+<script defer src="js/auth.js"></script>
+    </main>
+    <footer class="site-footer">
+      <small>© NAGCOOP</small>
+    </footer>
+    <script>
+      // Pequena lógica para mostrar/ocultar Entrar/Sair
+      firebase.auth().onAuthStateChanged(function(user) {
+        const loginLink = document.getElementById('loginLink');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const adminLink = document.getElementById('adminLink');
+        if (user) {
+          if (loginLink) loginLink.style.display = 'none';
+          if (logoutBtn) logoutBtn.style.display = 'inline-block';
+          if (adminLink) adminLink.style.display = 'inline-block';
+        } else {
+          if (loginLink) loginLink.style.display = 'inline-block';
+          if (logoutBtn) logoutBtn.style.display = 'none';
+          if (adminLink) adminLink.style.display = 'inline-block';
+        }
+      });
+      const logoutBtn2 = document.getElementById('logoutBtn');
+      if (logoutBtn2) logoutBtn2.addEventListener('click', () => firebase.auth().signOut());
+    </script>
+  </body>
+</html>
